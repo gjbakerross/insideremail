@@ -5,6 +5,7 @@ class EmailsController < ApplicationController
   # GET /emails.json
   def index
     @emails = Email.all
+
   end
 
   # GET /emails/1
@@ -15,10 +16,13 @@ class EmailsController < ApplicationController
   # GET /emails/new
   def new
     @email = Email.new
+    @country_options = Country.all.map{ |c| [ c.name, c.id ] }
   end
 
   # GET /emails/1/edit
   def edit
+    @country_options = Country.all.map{ |c| [ c.name, c.id ] }
+    email = Email.find(params[:id])
   end
 
   # POST /emails
@@ -42,7 +46,7 @@ class EmailsController < ApplicationController
   def update
     respond_to do |format|
       if @email.update(email_params)
-        format.html { redirect_to @email, notice: 'Email was successfully updated.' }
+        format.html { redirect_to emails_url, notice: 'Email was successfully updated.' }
         format.json { render :show, status: :ok, location: @email }
       else
         format.html { render :edit }
@@ -69,6 +73,6 @@ class EmailsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def email_params
-      params.require(:email).permit(:email, :country)
+      params.require(:email).permit(:email, :country_id)
     end
 end

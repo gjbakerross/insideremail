@@ -10,13 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_15_084906) do
+ActiveRecord::Schema.define(version: 2021_01_15_092433) do
+
+  create_table "apikeys", force: :cascade do |t|
+    t.integer "country_id"
+    t.string "apikey"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "emails", force: :cascade do |t|
     t.string "email"
-    t.string "country"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "country_id"
   end
 
 end

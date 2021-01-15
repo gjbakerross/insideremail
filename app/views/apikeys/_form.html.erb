@@ -1,10 +1,10 @@
-<%= form_with(model: email, local: true) do |form| %>
-  <% if email.errors.any? %>
+<%= form_with(model: apikey, local: true) do |form| %>
+  <% if apikey.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(email.errors.count, "error") %> prohibited this email from being saved:</h2>
+      <h2><%= pluralize(apikey.errors.count, "error") %> prohibited this apikey from being saved:</h2>
 
       <ul>
-        <% email.errors.full_messages.each do |message| %>
+        <% apikey.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
+    <%= form.label :apikey %>
+    <%= form.text_field :apikey %>
   </div>
 
   <div class="field">
@@ -23,5 +23,6 @@
 
   <div class="actions">
     <%= form.submit %>
+
   </div>
 <% end %>
