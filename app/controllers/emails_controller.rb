@@ -1,6 +1,10 @@
 class EmailsController < ApplicationController
   before_action :set_email, only: [:show, :edit, :update, :destroy]
 
+  require 'uri'
+  require 'net/http'
+  require 'openssl'
+
   # GET /emails
   # GET /emails.json
   def index
@@ -29,16 +33,12 @@ class EmailsController < ApplicationController
   # POST /emails.json
   def create
     @email = Email.new(email_params)
-
-    respond_to do |format|
       if @email.save
-        format.html { redirect_to @email, notice: 'Email was successfully created.' }
-        format.json { render :show, status: :created, location: @email }
+        update_insider(@email.country, @email.email)
       else
-        format.html { render :new }
-        format.json { render json: @email.errors, status: :unprocessable_entity }
+        # format.html { render :new }
+        # format.json { render json: @email.errors, status: :unprocessable_entity }
       end
-    end
   end
 
   # PATCH/PUT /emails/1
@@ -63,6 +63,34 @@ class EmailsController < ApplicationController
       format.html { redirect_to emails_url, notice: 'Email was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def update_insider(country,email)
+    puts country.apikey.apikey
+    url = URI("https://email.useinsider.com/v1/email/unsubscribe")
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    request = Net::HTTP::Post.new(url)
+    request["Content-Type"] = 'application/json'
+    request["X-INS-AUTH-KEY"] = "#{country.apikey.apikey}"
+    request["cache-control"] = 'no-cache'
+    request.body = {email: email}.to_json
+
+    response = http.request(request)
+    if response.code == "202"
+      redirect_to emails_url, notice: 'Email was successfully updated on Insider.' 
+    else
+      render :new, notice: 'Unsuccesful update'
+    end 
+  end
+
+  def export_emails
+    # redirect_to :index
+    @emails = Email.all
+    send_data @emails.to_email_csv, filename: "email-#{Date.today}.csv"
+    
   end
 
   private

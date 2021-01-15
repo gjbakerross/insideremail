@@ -11,18 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :apikey %>
     <%= form.text_field :apikey %>
-  </div>
-
-  <div class="field">
+  <div class="form-group">
    <%= form.label :country %>
    <%= form.select(:country_id, @country_options) %>
+   </div>
+   <div class ="actions">
+    <%= form.submit :class => "btn btn-primary" %>
   </div>
-
-  <div class="actions">
-    <%= form.submit %>
-
   </div>
 <% end %>

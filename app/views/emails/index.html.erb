@@ -1,22 +1,27 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<h1>Emails</h1>
+<h1 class="display-4 mb-4 mx-auto text-center">Insider Email Unsubscribe</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Country</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
+<p id="notice" class="alert alert-primary" role="alert"><%= notice %></p>
+
+<div class="dropdown mb-3">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    IT Team Actions
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <%= link_to 'Export emails', export_emails_url, :class => "dropdown-item",  target: :_blank%>
+    <%= link_to 'Update API Keys', apikeys_url, :class => "dropdown-item"%>
+  </div>
+</div>     
+<%= link_to 'Unsubscribe new email', new_email_path, class: "text-info h3 float-left"%>
+
+<table class="table table-striped">
   <tbody>
     <% @emails.each do |email| %>
       <tr>
-        <td><%= email.email %></td>
-        <td><%= email.country.name %></td>
-        <td><%= link_to 'Edit', edit_email_path(email) %></td>
+        <td scope="row"><%=email.email%></th>
+        <td> <%=email.country.name%></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +29,5 @@
 
 <br>
 
-<%= link_to 'New Email', new_email_path %>
+
+</div>
