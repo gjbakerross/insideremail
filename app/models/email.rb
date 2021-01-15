@@ -3,7 +3,7 @@ class Email < ApplicationRecord
     require 'csv'
 
     def self.to_email_csv
-        headers = %w(email country)
+        headers = %w(email country opt-out, date)
         attributes = %w(email)
         CSV.generate(headers: true) do |csv|
             csv << headers
@@ -11,7 +11,9 @@ class Email < ApplicationRecord
             all.each do |email|
                 data = attributes.map{ |attr| email.send(attr) }
                   # byebug
-                data << email.country.code 
+                data << email.country.name 
+                data << "true"
+                data << email.created_at.strftime("%F")
                 csv <<  data
                   # byebug
             end

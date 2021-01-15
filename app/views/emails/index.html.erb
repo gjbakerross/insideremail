@@ -13,8 +13,9 @@
     <%= link_to 'Export emails', export_emails_url, :class => "dropdown-item",  target: :_blank%>
     <%= link_to 'Update API Keys', apikeys_url, :class => "dropdown-item"%>
   </div>
+  <%= link_to 'Unsubscribe Customer', new_email_path, class: "text-info h3 float-right"%>  
 </div>     
-<%= link_to 'Unsubscribe new email', new_email_path, class: "text-info h3 float-left"%>
+
 
 <table class="table table-striped">
   <tbody>
