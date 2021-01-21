@@ -3,6 +3,8 @@ lock "~> 3.14.1"
 
 set :application, "insiderunsubscribe"
 set :repo_url, "git@github.com:gjbakerross/insideremail.git"
+set :repository_cache, "git_cache"
+set :deploy_via, :remote_cache
 set :ssh_options, {:forward_agent => true, keys: "/home/gjeffery/.ssh/id_rsa"}
 
 # Default branch is :master

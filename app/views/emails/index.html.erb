@@ -5,16 +5,16 @@
 
 <p id="notice" class="alert alert-primary" role="alert"><%= notice %></p>
 
-<div class="dropdown mb-3">
+<%# <div class="dropdown mb-3">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     IT Team Actions
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <%= link_to 'Export emails', export_emails_url, :class => "dropdown-item",  target: :_blank%>
-    <%= link_to 'Update API Keys', apikeys_url, :class => "dropdown-item"%>
-  </div>
-  <%= link_to 'Unsubscribe Customer', new_email_path, class: "text-info h3 float-right"%>  
-</div>     
+    <%# <%= link_to 'Update API Keys', apikeys_url, :class => "dropdown-item"%>
+  <%# </div> %>
+  <%= link_to 'Unsubscribe Customer', new_email_path, class:  "float-right btn btn-primary" %>
+ <%# </div>
 
 
 <table class="table table-striped">
